@@ -5,19 +5,21 @@ import socket
 
 def first(sock):
     res = sock.recv(250).decode('utf-8')
-    sock.send('248.0.40.3\n'.encode('utf-8'))
+    sock.send('246.69.53.233\n'.encode('utf-8'))
     res = sock.recv(250).decode('utf-8')
     res = res.split('\n')
     return res
 
 
 def which(ip):
-    if ip == "159.244.90.48":
+    if ip == "215.239.98.18":
+        return "1\n"
+    if ip == "246.69.53.233":
         return "3\n"
-    if ip == "248.0.40.3":
-        return "4\n"
-    if ip == "109.165.249.213":
-        return "2\n"
+    if ip == "231.205.245.44":
+        return "1\n"
+    if ip == "251.165.34.242":
+        return "3\n"
 
 
 def second(sock, first_res):
@@ -41,12 +43,14 @@ def third(sock, ans):
 if __name__ == '__main__':
 
 
-    port = 14079
-    host = "2018shell1.picoctf.com"
+    port = 54782
+    host = "2018shell.picoctf.com"
 
     # Loop over third question
-    # for third_ans in [float(j)/100 for j in range(110, 1501, 1)] :
-    for third_ans in [1.28, 1.29] :
+    i = 1.00
+    j = 2.00
+    for third_ans in [float(j)/100 for j in range(110, 1501, 1)] :
+      for third_ans in [i, j] :
 
         print("Trying", third_ans)
 
@@ -61,11 +65,13 @@ if __name__ == '__main__':
         second_res = second(sock, first_res)
 
         third_res = third(sock, third_ans)
-        print("THIRD----->", third_res)
+        print("Output : ", third_res)
 
         if third_res[0] == "Correct!":
             break
-
         sock.close()
 
-        time.sleep(1.0)
+        #time.sleep(1.0)
+
+        i = i + 0.01
+        j = j + 0.01
